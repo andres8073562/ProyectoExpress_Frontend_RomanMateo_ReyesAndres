@@ -3,76 +3,92 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* Las siguientes líneas son opcionales pero útiles */
     background-attachment: fixed;
-}
-.Container {
-   
-    background-color: rgba(0, 0, 0, 0.7); 
-    width: 35vw;
-    height: auto; /* Usamos auto para que se adapte al contenido */
-    padding: 3vw;
-    display: flex;
-    flex-direction: column;
-    /* Reduje el gap para que los elementos estén más juntos */
-    gap: 1vw; 
-    align-items: center; /* Centra los elementos hijos horizontalmente */
-    
-    /* Le damos un borde y esquinas redondeadas para que se vea mejor */
-    border: 0.2vw solid white;
-    border-radius: 1vw;
-    
-    /* Agregamos una sombra para darle un efecto de profundidad */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    text-align: center;
-}
-.cuadro1, .cuadro2 , .cuadro3 {
-    border: 0.2vw solid white; /* Borde blanco para que se vea bien en el fondo negro */
-    border-radius: 0.5vw;
-    width: 25vw;
-    height: 3.5vh;
-    background-color: white;
-    
-    /* Centramos el texto dentro del cuadro */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.cuadro1 p, .cuadro2 p, .cuadro3 p {
-    color: black; /* Esto es CLAVE para que el texto sea visible en el fondo blanco del cuadro */
-    font-size: 0.9vw;
-    margin: 0; 
-}
-h3 {
-    color: white;
-}
-.cuadro3 {
-    border-color: #df1111; /* Borde rojo */
-    background-color: #df1111; /* Color de fondo rojo */
-    border-radius: 0.5vw;
-    width: 10vw; /* Ancho ajustado para que parezca un botón */
-    height: 4vh; /* Altura ajustada */
-    
-    /* Centramos el texto dentro del botón */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: point;
-}
-.cuadro3 p {
-    color: white; /* Texto en blanco para que resalte en el botón rojo */
-    font-size: 1.1vw; /* Un poco más grande para el botón */
     margin: 0;
 }
 
-.main{
+.main {
     width: 100vw;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    
+}
+
+.Container {
+    background-color: rgba(0, 0, 0, 0.7); 
+    width:17vw;
+    height: auto; 
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vw; 
+    align-items: center; 
+    border: 0.2vw solid white;
+    border-radius: 1vw;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+}
+
+h3 {
+    color: white;
+    margin-bottom: 1.5vw;
+}
+
+/* Nuevos estilos para los campos de entrada */
+.input-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5vw;
+}
+
+.input-group label {
+    color: white;
+    font-size: 0.9vw;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    height: 3.5vh;
+    border: 0.2vw solid white;
+    border-radius: 0.5vw;
+    background-color: white;
+    color: black; 
+    font-size: 0.9vw;
+    padding: 0 0.5vw;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+.input-group input::placeholder {
+    color: #a0a0a0;
+}
+
+.cuadro3 {
+    border: 0.2vw solid #df1111; 
+    background-color: #df1111; 
+    border-radius: 0.5vw;
+    width: 7vw; 
+    height: 4vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 1vw;
+    outline: none;
+    transition: background-color 0.3s ease;
+    margin-left: 2.5vw;
+}
+
+.cuadro3:hover {
+    background-color: #d10f0f;
+}
+
+.cuadro3 p {
+    color: white; 
+    font-size: 0.9vw; 
+    margin: 0;
 }

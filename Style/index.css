@@ -1,0 +1,159 @@
+body {
+    background-color: #060D17;
+    color: #f0f0f0;
+    font-family: sans-serif;
+    margin: 0;
+}
+
+.cabecera {
+    background-color: #060D17;
+    padding: 1vw 2vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navegacion-principal {
+    display: flex;
+    align-items: center;
+    gap: 3vw;
+}
+
+.logo {
+    font-size: 2.2vw;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0;
+}
+
+.enlaces-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2vw;
+}
+
+.enlace {
+    color: #a0a0a0;
+    text-decoration: none;
+    font-size: 1vw;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.enlace:hover {
+    color: #ffffff;
+}
+
+/* Contenedor que agrupa la barra de búsqueda y el icono de la barra de tareas */
+.header-items {
+    display: flex;
+    align-items: center;
+    gap: 1vw; /* Espacio entre los elementos de la derecha */
+}
+
+.barra-busqueda {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 25vw; /* Ancho ajustado para que no se superponga */
+}
+
+.barra-busqueda input {
+    background-color: #12181F;
+    border: none;
+    border-radius: 0.3vw;
+    padding: 0.5vw 1vw;
+    padding-left: 3vw;
+    color: #ffffff;
+    font-size: 1vw;
+    width: 100%;
+    height: 3.9vh;
+}
+
+.barra-busqueda input::placeholder {
+    color: #808080;
+}
+
+.icono-busqueda {
+    position: absolute;
+    left: 0.6vw;
+    color: #808080;
+}
+
+.barra-busqueda input:focus {
+    outline: none;
+}
+
+.barra-tareas-icon {
+    width: 1.5vw; /* Tamaño del icono */
+    height: auto;
+}
+
+/* ... (el resto del código CSS se mantiene igual) ... */
+.lista-titulo {
+    margin-left: 2vw;
+    margin-top: 9vh;
+}
+
+.filtros-container {
+    display: flex;
+    align-items: center;
+    gap: 1.2vw;
+    font-size: 0.9vw;
+    margin-left: 2vw;
+    width: auto;
+}
+
+.filtros-container p {
+    margin: 0;
+    color: #a0a0a0;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.filtros-container p:hover {
+    color: #ffffff;
+}
+
+.filtro-item {
+    display: flex;
+    align-items: center;
+    gap: 0.2vw;
+    cursor: pointer;
+}
+
+.filtro-item:hover p {
+    color: #ffffff;
+}
+.filtro-item:hover .flecha {
+    filter: brightness(0) invert(1);
+}
+
+.flecha {
+    width: 0.7vw;
+    transition: filter 0.3s ease;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    margin: 40px auto;
+    padding: 0 2vw;
+    max-width: 90%;
+}
+
+.container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.container img:hover {
+    transform: scale(1.1);
+}
