@@ -1,3 +1,4 @@
+/* Base styles - desktop first */
 body {
     background-color: #060D17;
     color: #f0f0f0;
@@ -46,18 +47,17 @@ body {
     color: #ffffff;
 }
 
-/* Contenedor que agrupa la barra de búsqueda y el icono de la barra de tareas */
 .header-items {
     display: flex;
     align-items: center;
-    gap: 1vw; /* Espacio entre los elementos de la derecha */
+    gap: 1vw;
 }
 
 .barra-busqueda {
     position: relative;
     display: flex;
     align-items: center;
-    width: 25vw; /* Ancho ajustado para que no se superponga */
+    width: 25vw;
 }
 
 .barra-busqueda input {
@@ -87,14 +87,14 @@ body {
 }
 
 .barra-tareas-icon {
-    width: 1.5vw; /* Tamaño del icono */
+    width: 1.5vw;
     height: auto;
 }
 
-/* ... (el resto del código CSS se mantiene igual) ... */
 .lista-titulo {
     margin-left: 2vw;
     margin-top: 9vh;
+    font-size: 2vw;
 }
 
 .filtros-container {
@@ -104,6 +104,7 @@ body {
     font-size: 0.9vw;
     margin-left: 2vw;
     width: auto;
+    flex-wrap: wrap;
 }
 
 .filtros-container p {
@@ -127,6 +128,7 @@ body {
 .filtro-item:hover p {
     color: #ffffff;
 }
+
 .filtro-item:hover .flecha {
     filter: brightness(0) invert(1);
 }
@@ -139,21 +141,186 @@ body {
 .container {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 20px;
-    margin: 40px auto;
+    gap: 2vw;
+    margin: 3vw auto;
     padding: 0 2vw;
-    max-width: 90%;
+    max-width: 93vw;
+    justify-content: center;
 }
 
 .container img {
     width: 100%;
     height: auto;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 0.8vw;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
 }
-
+    
 .container img:hover {
     transform: scale(1.1);
+}
+
+---
+
+### Media Queries (Tablet and Mobile)
+
+```css
+/* Tablet styles */
+@media (max-width: 1024px) {
+    .cabecera {
+        flex-direction: column;
+        padding: 2vw;
+    }
+
+    .navegacion-principal {
+        flex-direction: column;
+        gap: 2vw;
+        width: 100%;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 5vw;
+        margin-bottom: 2vw;
+    }
+    
+    .enlaces-nav {
+        gap: 3vw;
+    }
+
+    .enlace {
+        font-size: 2.5vw;
+    }
+    
+    .header-items {
+        width: 100%;
+        gap: 2vw;
+        justify-content: center;
+    }
+
+    .barra-busqueda {
+        width: 60vw;
+    }
+    
+    .barra-busqueda input {
+        height: 5vh;
+        font-size: 2.5vw;
+        padding-left: 5vw;
+    }
+
+    .icono-busqueda {
+        left: 2vw;
+        font-size: 2.5vw;
+    }
+
+    .barra-tareas-icon {
+        width: 3vw;
+    }
+
+    .lista-titulo {
+        margin-left: 4vw;
+        font-size: 4vw;
+        text-align: center;
+    }
+    
+    .filtros-container {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 4vw;
+        font-size: 2.5vw;
+        gap: 2.5vw;
+    }
+    
+    .flecha {
+        width: 1.5vw;
+    }
+
+    .container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4vw;
+        padding: 0 4vw;
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .cabecera {
+        flex-direction: column;
+        padding: 4vw 2vw;
+    }
+
+    .navegacion-principal {
+        flex-direction: column;
+        gap: 3vw;
+        width: 100%;
+        align-items: center;
+        margin-top: 0;
+    }
+
+    .logo {
+        font-size: 6vw;
+        margin-bottom: 2vw;
+    }
+    
+    .enlaces-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4vw;
+        margin-bottom: 4vw;
+    }
+
+    .enlace {
+        font-size: 4vw;
+    }
+    
+    .header-items {
+        flex-direction: column;
+        width: 100%;
+        gap: 3vw;
+    }
+
+    .barra-busqueda {
+        width: 80vw;
+    }
+    
+    .barra-busqueda input {
+        height: 6vh;
+        font-size: 4vw;
+        padding-left: 8vw;
+    }
+
+    .icono-busqueda {
+        left: 4vw;
+        font-size: 4vw;
+    }
+
+    .barra-tareas-icon {
+        width: 6vw;
+    }
+
+    .lista-titulo {
+        margin-left: 5vw;
+        margin-top: 5vh;
+        font-size: 5vw;
+        text-align: center;
+    }
+    
+    .filtros-container {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 5vw;
+        font-size: 3vw;
+        gap: 3vw;
+    }
+    
+    .flecha {
+        width: 2vw;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        gap: 5vw;
+        padding: 0 5vw;
+    }
 }
