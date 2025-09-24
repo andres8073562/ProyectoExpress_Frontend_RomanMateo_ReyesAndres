@@ -160,13 +160,6 @@ body {
 .container img:hover {
     transform: scale(1.1);
 }
-
----
-
-### Media Queries (Tablet and Mobile)
-
-```css
-/* Tablet styles */
 @media (max-width: 1024px) {
     .cabecera {
         flex-direction: column;
