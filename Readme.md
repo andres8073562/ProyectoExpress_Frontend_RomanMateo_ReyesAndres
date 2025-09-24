@@ -6,6 +6,16 @@ La propuesta de diseño para la mejor experiencia usario aquì:
 
 [Figma](https://www.figma.com/design/syma0ZNPnsJna3Be3dYPQs/Untitled?node-id=0-1&t=leVwK794CGF3GAWD-0)
 
+## Tabla de contenidos
+
+| Carpeta/Archivo                  | Explicación  |
+|------------------------------|--------------|
+| [Login.html](/Index/Login.html)        | Página principal del proyecto. Presenta opciones de ingreso para el administrador o el usuario, cada uno con su respectivo logo. |
+| [index.html](/Index/index.html)                | Contiene los archivos HTML destinados a la interfaz del **usuario**. Incluye vistas de consulta, interacción y simulación. |
+| [Intro.html](/Index/Intro.html)        | Vizualización al seleccionar una pelicula o seires. |
+| [storage](/STORAGE/)            | Archivos relacionados con almacenamiento de datos, como las fuentes de letras e imagenes para un funcionamiento básico de la web. |
+
+---
 ## Explicación del Proyecto
 
 La aplicación presenta dos tipos de usuarios:
