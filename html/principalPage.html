@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KarenFlix</title>
+    <link rel="stylesheet" href="../Style/index.css">
+</head>
+<body>
+    <header class="cabecera">
+        <nav class="navegacion-principal">
+            <h1 class="logo">KarenFlix</h1>
+            <ul class="enlaces-nav">
+                <li><a href="#" class="enlace">Inicio</a></li>
+                <li><a href="#" class="enlace">Nuevo</a></li>
+                <li><a href="#" class="enlace">Popular</a></li>
+                <li><a href="#" class="enlace">Listas</a></li>
+            </ul>
+        </nav>
+        <div class="header-items">
+            <div class="barra-busqueda">
+                <span class="icono-busqueda">🔍</span>
+                <input type="search" placeholder="Buscar">
+            </div>
+            <img src="/STORAGE/barraTareas.png" alt="Barra de tareas" class="barra-tareas-icon">
+        </div>
+    </header>
+
+    <section class="hero-carousel">
+        <div class="carousel-item active" style="background-image: url('mandalorian.jpg');">
+            <div class="carousel-content">
+                <span class="series-tag">SERIE</span>
+                <h2 class="carousel-title">THE MANDALORIAN</h2>
+                <p class="carousel-description">The Mandalorian trata sobre Din Djarin, un cazador de recompensas mandaloriano solitario que trabaja en los confines de la galaxia tras la caída del imperio.</p>
+                <div class="carousel-buttons">
+                    <button class="btn-play">Reproducir</button>
+                    <button class="btn-info">Más información</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-item" style="background-image: url('otracosa.jpg');">
+            <div class="carousel-content">
+                <span class="series-tag">PELÍCULA</span>
+                <h2 class="carousel-title">OTRA SERIE/PELÍCULA DESTACADA</h2>
+                <p class="carousel-description">Esta es la descripción de la segunda película o serie que quieres destacar en tu carrusel.</p>
+                <div class="carousel-buttons">
+                    <button class="btn-play">Ver ahora</button>
+                    <button class="btn-info">Detalles</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-item" style="background-image: url('tercercosa.jpg');">
+            <div class="carousel-content">
+                <span class="series-tag">SERIE</span>
+                <h2 class="carousel-title">TERCERA OPCIÓN GENIAL</h2>
+                <p class="carousel-description">Y aquí va la información de la tercera serie o película, para que tu carrusel sea dinámico.</p>
+                <div class="carousel-buttons">
+                    <button class="btn-play">Empezar</button>
+                    <button class="btn-info">Saber más</button>
+                </div>
+            </div>
+        </div>
+        </section>
+
+    <div class="container">
+        <div id="movie-template" class="divMovie">
+            <img src="../STORAGE/Quiñonez.png" alt="Poster de la película">
+            <p>Título de la película</p>
+        </div>
+        
+    </div>
+    
+<script src="../js/principalPage.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 /* Estilos generales y fondo de la página */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-image: url('STORAGE/imageLogIn.jpeg');
+    background-image: url('../imagenfondo.jpeg');
 
     /* 3. Ajustes para que la imagen se vea bien en pantalla completa */
     background-size: cover;
