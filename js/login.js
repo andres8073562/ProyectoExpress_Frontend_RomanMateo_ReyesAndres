@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 
                 // Redirigimos al usuario a la página principal de películas (ej. movies.html)
-                window.location.href = '../html/principalPage.html'; 
+                window.location.href = 'html/principalPage.html'; 
 
             } else { // Si la respuesta es un error (status 4xx o 5xx)
                 const errorData = await response.json();
