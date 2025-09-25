@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="./Style/prueba.css">
+</head>
+<body>
+
+    <div class="login-form">
+        <div class="form-header">
+            <div class="logo">KICK<span class="beta">BETA</span></div>
+            <span class="close-btn">&times;</span>
+        </div>
+
+        <div class="tabs">
+            <a href="index.html" class="tab">Iniciar sesión</a>
+            <a href="register.html" class="tab active">Registrarse</a>
+        </div>
+        
+        <form>
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" placeholder="you@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="username">Nombre de usuario</label>
+                <input type="text" id="username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <div class="password-wrapper">
+                     <input type="password" id="password">
+                     <span class="password-icon">🤫</span>
+                </div>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="subscribe" name="subscribe">
+                <label for="subscribe">Suscríbete a nuestras noticias y promociones</label>
+            </div>
+
+            <button type="submit" class="submit-btn">Regístrate</button>
+        </form>
+    </div>
+
+</body>
+</html>
