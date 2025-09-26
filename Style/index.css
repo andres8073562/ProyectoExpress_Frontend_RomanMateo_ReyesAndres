@@ -1,427 +1,170 @@
-/* Base styles - desktop first */
+/* --- CSS --- */
+
+/* Estilos generales y fondo de la página */
 body {
-    background-color: #060D17;
-    color: #f0f0f0;
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-image: url('../imagenfondo.jpeg');
+
+    /* 3. Ajustes para que la imagen se vea bien en pantalla completa */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     margin: 0;
 }
 
-.cabecera {
-    background-color: #060D17;
-    padding: 1vw 2vw;
+/* Contenedor principal del formulario */
+.login-form {
+    background-color: #1c1c1c;
+    padding: 32px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+}
+
+/* Cabecera con logo y botón de cerrar */
+.form-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.navegacion-principal {
-    display: flex;
-    align-items: center;
-    gap: 3vw;
+    margin-bottom: 24px;
 }
 
 .logo {
-    font-size: 2.2vw;
+    font-size: 28px;
+    font-weight: 800;
+    color: #52e03b; /* Verde característico */
+    letter-spacing: 1px;
+}
+
+.logo .beta {
+    font-size: 12px;
     font-weight: bold;
-    color: #ffffff;
-    margin: 0;
+    vertical-align: super;
+    margin-left: 2px;
 }
 
-.enlaces-nav {
+.close-btn {
+    font-size: 24px;
+    font-weight: 300;
+    color: #8a8a8a;
+    cursor: pointer;
+}
+
+/* Pestañas de Iniciar sesión / Registrarse */
+.tabs {
     display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 2vw;
+    border-bottom: 1px solid #3a3a3a;
+    margin-bottom: 24px;
 }
 
-.enlace {
-    color: #a0a0a0;
-    text-decoration: none;
-    font-size: 1vw;
+.tab {
+    padding-bottom: 12px;
+    margin-right: 24px;
+    font-size: 18px;
     font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-.enlace:hover {
-    color: #ffffff;
-}
-
-.header-items {
-    display: flex;
-    align-items: center;
-    gap: 1vw;
-}
-
-.barra-busqueda {
+    color: #8a8a8a;
+    cursor: pointer;
     position: relative;
-    display: flex;
-    align-items: center;
-    width: 25vw;
+    border-bottom: 3px solid transparent;
+    text-decoration: none; /* Quitamos el subrayado de los enlaces */
 }
 
-.barra-busqueda input {
-    background-color: #12181F;
-    border: none;
-    border-radius: 0.3vw;
-    padding: 0.5vw 1vw;
-    padding-left: 3vw;
+.tab.active {
     color: #ffffff;
-    font-size: 1vw;
-    width: 100%;
-    height: 3.9vh;
+    border-bottom-color: #52e03b;
 }
 
-.barra-busqueda input::placeholder {
-    color: #808080;
-}
-
-.icono-busqueda {
-    position: absolute;
-    left: 0.6vw;
-    color: #808080;
-}
-
-.barra-busqueda input:focus {
-    outline: none;
-}
-
-.barra-tareas-icon {
-    width: 1.5vw;
-    height: auto;
-}
-
-.lista-titulo {
-    margin-left: 2vw;
-    margin-top: 9vh;
-    font-size: 2vw;
-}
-
-.filtros-container {
-    display: flex;
-    align-items: center;
-    gap: 1.2vw;
-    font-size: 0.9vw;
-    margin-left: 2vw;
-    width: auto;
-    flex-wrap: wrap;
-}
-
-.filtros-container p {
-    margin: 0;
-    color: #a0a0a0;
-    transition: color 0.3s ease;
-    cursor: pointer;
-}
-
-.filtros-container p:hover {
-    color: #ffffff;
-}
-
-.filtro-item {
-    display: flex;
-    align-items: center;
-    gap: 0.2vw;
-    cursor: pointer;
-}
-
-.filtro-item:hover p {
-    color: #ffffff;
-}
-
-.filtro-item:hover .flecha {
-    filter: brightness(0) invert(1);
-}
-
-.flecha {
-    width: 0.7vw;
-    transition: filter 0.3s ease;
-}
-
-.container {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 2vw;
-    margin: 3vw auto;
-    padding: 0 2vw;
-    max-width: 93vw;
-    justify-content: center;
-}
-
-.container img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 0.8vw;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-}
-    
-.container img:hover {
-    transform: scale(1.1);
-}
-@media (max-width: 1024px) {
-    .cabecera {
-        flex-direction: column;
-        padding: 2vw;
-    }
-
-    .navegacion-principal {
-        flex-direction: column;
-        gap: 2vw;
-        width: 100%;
-        align-items: center;
-    }
-
-    .logo {
-        font-size: 5vw;
-        margin-bottom: 2vw;
-    }
-    
-    .enlaces-nav {
-        gap: 3vw;
-    }
-
-    .enlace {
-        font-size: 2.5vw;
-    }
-    
-    .header-items {
-        width: 100%;
-        gap: 2vw;
-        justify-content: center;
-    }
-
-    .barra-busqueda {
-        width: 60vw;
-    }
-    
-    .barra-busqueda input {
-        height: 5vh;
-        font-size: 2.5vw;
-        padding-left: 5vw;
-    }
-
-    .icono-busqueda {
-        left: 2vw;
-        font-size: 2.5vw;
-    }
-
-    .barra-tareas-icon {
-        width: 3vw;
-    }
-
-    .lista-titulo {
-        margin-left: 4vw;
-        font-size: 4vw;
-        text-align: center;
-    }
-    
-    .filtros-container {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-left: 4vw;
-        font-size: 2.5vw;
-        gap: 2.5vw;
-    }
-    
-    .flecha {
-        width: 1.5vw;
-    }
-
-    .container {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 4vw;
-        padding: 0 4vw;
-    }
-}
-
-/* Mobile styles */
-@media (max-width: 768px) {
-    .cabecera {
-        flex-direction: column;
-        padding: 4vw 2vw;
-    }
-
-    .navegacion-principal {
-        flex-direction: column;
-        gap: 3vw;
-        width: 100%;
-        align-items: center;
-        margin-top: 0;
-    }
-
-    .logo {
-        font-size: 6vw;
-        margin-bottom: 2vw;
-    }
-    
-    .enlaces-nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 4vw;
-        margin-bottom: 4vw;
-    }
-
-    .enlace {
-        font-size: 4vw;
-    }
-    
-    .header-items {
-        flex-direction: column;
-        width: 100%;
-        gap: 3vw;
-    }
-
-    .barra-busqueda {
-        width: 80vw;
-    }
-    
-    .barra-busqueda input {
-        height: 6vh;
-        font-size: 4vw;
-        padding-left: 8vw;
-    }
-
-    .icono-busqueda {
-        left: 4vw;
-        font-size: 4vw;
-    }
-
-    .barra-tareas-icon {
-        width: 6vw;
-    }
-
-    .lista-titulo {
-        margin-left: 5vw;
-        margin-top: 5vh;
-        font-size: 5vw;
-        text-align: center;
-    }
-    
-    .filtros-container {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-left: 5vw;
-        font-size: 3vw;
-        gap: 3vw;
-    }
-    
-    .flecha {
-        width: 2vw;
-    }
-
-    .container {
-        grid-template-columns: 1fr;
-        gap: 5vw;
-        padding: 0 5vw;
-    }
-}
-
-.hero-carousel {
-    position: relative;
-    width: 100%;
-    height: 600px; /* Altura del carrusel */
-    overflow: hidden; /* Para ocultar partes que salgan */
-    margin-top: 70px; /* Espacio para la navbar */
-}
-
-.carousel-item {
-    position: absolute; /* Para que se superpongan */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center; /* Alinea el contenido verticalmente */
-    justify-content: flex-start; /* Alinea el contenido horizontalmente */
-    opacity: 0; /* Por defecto, oculto */
-    transition: opacity 1s ease-in-out; /* Transición suave al cambiar */
-}
-
-.carousel-item.active {
-    opacity: 1; /* El slide activo es visible */
-}
-
-.carousel-content {
-    margin-left: 50px;
-    max-width: 600px; /* Ancho máximo para el texto */
-    background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%); /* Efecto de sombra para el texto */
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.carousel-content .series-tag {
-    background-color: #e50914;
-    padding: 5px 10px;
-    border-radius: 3px;
-    font-size: 0.9em;
-    font-weight: bold;
-    margin-bottom: 10px;
-    display: inline-block;
-}
-
-.carousel-content .carousel-title {
-    font-size: 3.5em;
-    margin: 10px 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.carousel-content .carousel-description {
-    font-size: 1.2em;
+/* Grupo de cada campo (label + input) */
+.form-group {
     margin-bottom: 20px;
-    line-height: 1.5;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
-.carousel-buttons .btn-play,
-.carousel-buttons .btn-info {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1em;
-    font-weight: bold;
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px;
+    background-color: #333333;
+    border: 1px solid #4a4a4a;
+    border-radius: 6px;
+    color: #e0e0e0;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.password-icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: #8a8a8a;
     cursor: pointer;
-    margin-right: 15px;
-    transition: background-color 0.3s ease;
 }
 
-.carousel-buttons .btn-play {
-    background-color: #fff;
-    color: #000;
+/* Enlace de 'olvidaste la contraseña' */
+.forgot-password {
+    display: block;
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: #8a8a8a;
+    text-decoration: none;
 }
 
-.carousel-buttons .btn-play:hover {
-    background-color: #eee;
+.forgot-password:hover {
+    text-decoration: underline;
 }
 
-.carousel-buttons .btn-info {
-    background-color: rgba(109, 109, 110, 0.7);
-    color: #fff;
+/* NUEVO: Estilos para el grupo del checkbox */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
 }
 
-.carousel-buttons .btn-info:hover {
-    background-color: rgba(109, 109, 110, 0.9);
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    accent-color: #52e03b; /* Colorea el check con el verde de la marca */
 }
 
-.divMovie {
-    display: flex; /* Le decimos que es un contenedor flexible */
-    flex-direction: column; /* Apila los elementos verticalmente (imagen arriba, texto abajo) */
-    align-items: center; /* Centra los elementos horizontalmente */
-    text-align: center; /* Asegura que el texto en sí esté centrado si ocupa varias líneas */
+.checkbox-group label {
+    font-size: 14px;
+    color: #b0b0b0;
 }
 
-.divMovie img {
-    width: 100%; /* La imagen ocupará todo el ancho de su contenedor */
-    aspect-ratio: 2 / 3; /* Fuerza una proporción de 2 de ancho por 3 de alto */
-    object-fit: cover; /* Hace que la imagen cubra todo el espacio sin deformarse (la recorta si es necesario) */
-    border-radius: 0.8vw; /* Mantienes tus bordes redondeados */
+/* Botón principal */
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background-color: #52e03b;
+    border: none;
+    border-radius: 6px;
+    color: #121212;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-.divMovie p {
-
-    font-weight: 600;
-    
+.submit-btn:hover {
+    background-color: #4ac934;
 }

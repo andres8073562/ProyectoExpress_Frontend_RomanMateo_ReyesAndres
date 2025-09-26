@@ -4,19 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KarenFlix</title>
-    <link rel="stylesheet" href="../Style/index.css">
+    <link rel="stylesheet" href="../Style/principalPage.css">
 </head>
 <body>
     <header class="cabecera">
         <nav class="navegacion-principal">
             <h1 class="logo">KarenFlix</h1>
             <ul class="enlaces-nav">
-                <li><a href="#" class="enlace">Inicio</a></li>
-                <li><a href="#" class="enlace">Nuevo</a></li>
+                <li><a href="#" class="enlace" id="home-link">Inicio</a></li>
+                <li><a href="#" class="enlace">Mejor Rankeadas</a></li>
                 <li><a href="#" class="enlace">Popular</a></li>
-                <li><a href="#" class="enlace">Listas</a></li>
+                <li style="position: relative;" class="dropdown-container"> <a href="#" class="enlace">Categoria</a>
+                    
+                    <div class="menuCategories">
+                        <p>Miedo</p>
+                        <p>Terror</p>
+                        <p>Divertidas</p>
+                        <p>+18</p>
+                    </div>
+                </li>
             </ul>
         </nav>
+        
         <div class="header-items">
             <div class="barra-busqueda">
                 <span class="icono-busqueda">🔍</span>
@@ -24,7 +33,10 @@
             </div>
             <img src="/STORAGE/barraTareas.png" alt="Barra de tareas" class="barra-tareas-icon">
         </div>
+
     </header>
+
+    
 
     <section class="hero-carousel">
         <div class="carousel-item active" style="background-image: url('mandalorian.jpg');">

@@ -1,85 +1,128 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const carouselItems = document.querySelectorAll('.carousel-item');
-    let currentSlide = 0; // Índice del slide actual
 
-    function showSlide(index) {
-        // Quita la clase 'active' de todos los slides
-        carouselItems.forEach(item => {
-            item.classList.remove('active');
+    const homeLink = document.getElementById('home-link');
+    if(homeLink) {
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault(); // Previene que la página recargue
+            fetchAndDisplayMovies(); // Llama a la función sin filtros
         });
+    }
 
-        // Asegura que el índice esté dentro del rango
-        if (index >= carouselItems.length) {
-            currentSlide = 0; // Vuelve al primer slide si se pasa
-        } else if (index < 0) {
-            currentSlide = carouselItems.length - 1; // Va al último slide si va hacia atrás
-        } else {
-            currentSlide = index;
-        }
-
-        // Añade la clase 'active' al slide actual
+    // --- Lógica del Carrusel (sin cambios) ---
+    const carouselItems = document.querySelectorAll('.carousel-item');
+    let currentSlide = 0;
+    function showSlide(index) {
+        carouselItems.forEach(item => item.classList.remove('active'));
+        if (index >= carouselItems.length) currentSlide = 0;
+        else if (index < 0) currentSlide = carouselItems.length - 1;
+        else currentSlide = index;
         carouselItems[currentSlide].classList.add('active');
     }
-
-    // Función para avanzar al siguiente slide
-    function nextSlide() {
-        showSlide(currentSlide + 1);
-    }
-
-    // Inicializa el carrusel mostrando el primer slide
+    function nextSlide() { showSlide(currentSlide + 1); }
     showSlide(currentSlide);
-
-    // Configura el intervalo para cambiar de slide cada 5 segundos (5000 milisegundos)
     setInterval(nextSlide, 5000);
 
-     // --- LÓGICA MODIFICADA PARA CARGAR PELÍCULAS ---
 
-     const moviesContainer = document.querySelector('.container');
-     // 1. Seleccionamos nuestra plantilla HTML
-     const movieTemplate = document.getElementById('movie-template');
- 
-     async function fetchAndDisplayMovies() {
-         const apiUrl = 'https://karenflix-api.onrender.com/api/v1/movies';
- 
-         try {
-             const response = await fetch(apiUrl);
-             if (!response.ok) {
-                 throw new Error(`Error en la red: ${response.statusText}`);
-             }
- 
-             const data = await response.json();
-             const movies = data.data;
- 
-             // Limpiamos el contenedor (esto eliminará cualquier contenido previo, 
-             // pero nuestra plantilla no está dentro, así que no hay problema si 
-             // la seleccionamos antes).
-             // Para más seguridad, primero clonamos y luego limpiamos.
-             
-             movies.forEach(movie => {
-                 // 2. Clonamos la plantilla para cada película
-                 // El 'true' es importante para que copie también los elementos hijos (img, p)
-                 const movieClone = movieTemplate.cloneNode(true);
- 
-                 // 3. Modificamos el clon con los datos de la API
-                 // Buscamos los elementos DENTRO del clon
-                 movieClone.querySelector('img').src = movie.imageUrl;
-                 movieClone.querySelector('img').alt = movie.title;
-                 movieClone.querySelector('p').textContent = movie.title;
- 
-                 // 4. Hacemos visible el clon
-                 movieClone.style.display = 'block'; // O 'grid', dependiendo de tu CSS
-                 movieClone.removeAttribute('id'); // Le quitamos el ID para no tener duplicados
- 
-                 // 5. Añadimos el clon relleno al contenedor
-                 moviesContainer.appendChild(movieClone);
-             });
- 
-         } catch (error) {
-             console.error('Error al obtener las películas:', error);
-             moviesContainer.innerHTML = '<p>No se pudieron cargar las películas.</p>';
-         }
-     }
- 
-     fetchAndDisplayMovies();
-    
+    // --- ELEMENTOS DEL DOM ---
+    const moviesContainer = document.querySelector('.container');
+    const movieTemplate = document.getElementById('movie-template');
+    const dropdownContainer = document.querySelector('.dropdown-container');
+    const categoriesMenu = document.querySelector('.menuCategories');
+
+
+    // --- FUNCIÓN PRINCIPAL PARA MOSTRAR PELÍCULAS (AHORA CON FILTRO) ---
+    async function fetchAndDisplayMovies(categoryName = null) {
+        let apiUrl = 'https://karenflix-api.onrender.com/api/v1/movies';
+
+        // Si se proporciona un nombre de categoría, se añade como parámetro a la URL
+        if (categoryName) {
+            apiUrl += `?category=${encodeURIComponent(categoryName)}`;
+        }
+
+        moviesContainer.innerHTML = '<p style="color: white; font-size: 1.5vw;">Cargando películas...</p>';
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error(`Error en la red: ${response.statusText}`);
+            
+            const data = await response.json();
+            const movies = data.data;
+
+            moviesContainer.innerHTML = ''; // Limpiamos el contenedor
+
+            if (movies.length === 0) {
+                moviesContainer.innerHTML = '<p style="color: white; font-size: 1.5vw;">No se encontraron películas para esta categoría.</p>';
+                return;
+            }
+
+            movies.forEach(movie => {
+                const movieClone = movieTemplate.cloneNode(true);
+                movieClone.querySelector('img').src = movie.imageUrl;
+                movieClone.querySelector('img').alt = movie.title;
+                movieClone.querySelector('p').textContent = movie.title;
+                movieClone.style.display = 'flex';
+                movieClone.removeAttribute('id');
+                moviesContainer.appendChild(movieClone);
+            });
+
+        } catch (error) {
+            console.error('Error al obtener las películas:', error);
+            moviesContainer.innerHTML = '<p style="color: #ff4d4d;">No se pudieron cargar las películas.</p>';
+        }
+    }
+
+    // --- NUEVA FUNCIÓN PARA POBLAR EL MENÚ DE CATEGORÍAS ---
+    async function populateCategoriesMenu() {
+        if (!categoriesMenu) return;
+        const apiUrl = 'https://karenflix-api.onrender.com/api/v1/categories';
+        try {
+            const response = await fetch(apiUrl);
+            const responseData = await response.json(); // Primero obtenemos el objeto completo
+            const categories = responseData.data;
+
+            categoriesMenu.innerHTML = ''; // Limpiamos las categorías de prueba
+
+            // Creamos la opción "Ver Todas"
+            // const allOption = document.createElement('p');
+            //     allOption.textContent = 'Ver Todas';
+            //     allOption.addEventListener('click', () => {
+            //         fetchAndDisplayMovies();
+            //         categoriesMenu.classList.remove('show');
+
+            //     });
+                // categoriesMenu.appendChild(allOption);
+                
+                categories.forEach(category => {
+                    const categoryOption = document.createElement('p');
+                    categoryOption.textContent = category.name;
+                    
+                    categoryOption.addEventListener('click', () => {
+                        fetchAndDisplayMovies(category.name);
+                        categoriesMenu.classList.remove('show');
+                    });
+                    categoriesMenu.appendChild(categoryOption);
+                });
+
+            } catch (error) {
+                console.error('Error al obtener las categorías:', error);
+            }
+    }
+
+    // --- LÓGICA PARA MOSTRAR/OCULTAR EL MENÚ (sin cambios) ---
+    if (dropdownContainer) {
+        const categoriasLink = dropdownContainer.querySelector('.enlace');
+        categoriasLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            categoriesMenu.classList.toggle('show');
+        });
+        document.addEventListener('click', (e) => {
+            if (!dropdownContainer.contains(e.target)) {
+                categoriesMenu.classList.remove('show');
+            }
+        });
+    }
+
+    // --- LLAMADAS INICIALES AL CARGAR LA PÁGINA ---
+    populateCategoriesMenu();
+    fetchAndDisplayMovies(); // Carga todas las películas por defecto
 });
