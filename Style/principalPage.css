@@ -457,7 +457,231 @@ body {
 }
 
 .divMovie p {
-
     font-weight: 600;
-    
+}
+
+/* CSS del modal */
+
+.modalTemplate {
+    display: none;
+    flex-direction: row;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.774); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    overflow-y: auto;
+    height: 100vh; /* 1. Fija la altura al 100% del alto de la pantalla (viewport height) */
+    overflow-y: auto; /* 2. Permite el scroll vertical si el contenido se desborda */
+    box-sizing: border-box;
+}
+
+.leftSide {
+    width: 50%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 5em;
+    padding-right: 1em;
+
+}
+
+#modalTitleMovie {
+    margin-top: 4vh;
+    font-size: 3.5em;
+}
+
+#modalDescriptionMovie {
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    line-height: 1.5;
+}
+
+#modalYearMovie {
+    margin-top: 0.5em;
+    font-size: 1.7em;
+    line-height: 1.5;
+    align-self: flex-start;
+}
+
+#modalCategoryMovie {
+    margin-top: 0.5em;
+    font-size: 1.7em;
+    line-height: 1.5;
+    align-self: flex-start;
+}
+
+#modalRankingMovie {
+    margin-top: 0.5em;
+    font-size: 1.7em;
+    line-height: 1.5;
+    align-self: flex-start;
+}
+
+.reviewsContainer {
+    margin-top: 2em;
+    width: 80%;
+    min-height: 30%;
+    padding: 2vw;
+    border-radius: 1vw;
+    background-color: #1a1a1a;
+    align-self: flex-start;
+}
+
+.reviewSubmit {
+    width: 100%;
+    background-color: #060d1700;
+    display: flex;
+    flex-direction: row;
+}
+
+.reviewsContainer h2 {
+    margin-top: 0;
+    font-size: clamp(30px, 1.5vw, 60px);
+    font-weight: bold;
+    margin-bottom: 1vw;
+}
+
+.review-input {
+    width: 65%;
+    margin-right: 2%;
+    background-color: #060D17;
+    color: white;
+    border: 0.2vw solid #333;
+    padding: 0.5vw;
+    border-radius: 0.5vw;
+    font-size: clamp(20px, 1vw, 60px);
+    margin-bottom: 0.5vw;
+    font-weight: 300;
+}
+
+.review-inputCalificacion {
+    width: 15%;
+    background-color: #060D17;
+    color: white;
+    border: 0.2vw solid #333;
+    padding: 0.5vw;
+    border-radius: 0.5vw;
+    font-size: clamp(20px, 1vw, 60px);
+    margin-bottom: 0.5vw;
+    font-weight: 300;
+    margin-right: 2%;
+}
+
+.btn-submit {
+    width: 15%;
+    margin-right: 2%;
+    background-color: #a84a13;
+    color: white;
+    padding: 0.5vw;
+    border-radius: 0.5vw;
+    font-size: clamp(20px, 1vw, 60px);
+    margin-bottom: 0.5vw;
+    font-weight: 300;
+    transition: background-color 0.3s ease
+}
+
+
+.btn-submit:hover {
+  cursor: pointer;
+  background-color: #e25e2a;
+}
+
+.review-input::placeholder {
+    color: #bbb;
+}
+
+.review-text {
+    font-size: clamp(20px, 1vw, 60px);
+    color: #ccc;
+    margin-bottom: 0.8vw;
+}
+
+.rightSide {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerImageMovie {
+    width: 60%;
+    height: 90%;
+
+}
+
+.containerImageMovie img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1000px) {
+
+    .modalTemplate {
+        /* Cambiamos la dirección para que los elementos se apilen verticalmente */
+        flex-direction: column;
+        /* Permitimos que el padding superior e inferior sea más grande para dar espacio */
+        padding-top: 5vh;
+        padding-bottom: 5vh;
+    }
+
+    .leftSide, .rightSide {
+        /* Hacemos que ambas secciones ocupen todo el ancho disponible */
+        width: 100%;
+        /* Centramos el contenido por si acaso */
+        align-items: center;
+        padding-left: 0; /* Reseteamos el padding lateral */
+        padding-right: 0;
+    }
+
+    .rightSide {
+        /* Le damos un orden para que aparezca primero (arriba) */
+        order: -1; 
+        /* Añadimos un espacio debajo de la imagen */
+        margin-bottom: 2em;
+    }
+
+    .containerImageMovie {
+        /* Ajustamos el tamaño de la imagen para que no sea tan grande */
+        width: 70%; 
+        max-width: 400px; /* Un máximo para que no se estire demasiado */
+        height: auto; /* Dejamos que la altura sea automática */
+        aspect-ratio: 2/3; /* Mantenemos la proporción de póster */
+    }
+
+    .leftSide {
+        /* Centramos el texto para una mejor apariencia en móviles */
+        text-align: center;
+    }
+
+    /* Hacemos que los párrafos se alineen al centro, anulando el 'flex-start' */
+    #modalYearMovie,
+    #modalCategoryMovie,
+    #modalRankingMovie {
+        align-self: center;
+    }
+
+    #modalTitleMovie {
+        font-size: 2.5em; /* Ajustamos el tamaño del título */
+    }
+
+    #modalDescriptionMovie {
+        font-size: 1.2em; /* Y la descripción */
+        width: 90%; /* Limitamos el ancho para que no toque los bordes */
+    }
+
+    .reviewsContainer {
+        width: 90%; /* Ajustamos el ancho del contenedor de reseñas */
+        align-self: center; /* Lo centramos */
+    }
+
+    .reviewsContainer h2 {
+    margin-bottom: 3vw;
+}
 }

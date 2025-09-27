@@ -12,8 +12,8 @@
             <h1 class="logo">KarenFlix</h1>
             <ul class="enlaces-nav">
                 <li><a href="#" class="enlace" id="home-link">Inicio</a></li>
-                <li><a href="#" class="enlace">Mejor Rankeadas</a></li>
-                <li><a href="#" class="enlace">Popular</a></li>
+                <li><a href="#" class="enlace" id="ranked-link">Mejor Rankeadas</a></li>
+                <li><a href="#" class="enlace" id="popular-link">Popular</a></li>
                 <li style="position: relative;" class="dropdown-container"> <a href="#" class="enlace">Categoria</a>
                     
                     <div class="menuCategories">
@@ -31,7 +31,7 @@
                 <span class="icono-busqueda">🔍</span>
                 <input type="search" placeholder="Buscar">
             </div>
-            <img src="/STORAGE/barraTareas.png" alt="Barra de tareas" class="barra-tareas-icon">
+            <img src="../STORAGE/barraTareas.png" alt="Barra de tareas" class="barra-tareas-icon">
         </div>
 
     </header>
@@ -82,6 +82,33 @@
             <p>Título de la película</p>
         </div>
         
+    </div>
+
+    <div class="modalTemplate">
+        <div class="leftSide">
+            <h1 id="modalTitleMovie">Titulo de la película</h1>
+            <p id="modalDescriptionMovie">F1: La película” (2025) sigue a Sonny Hayes (Brad Pitt), un expiloto que regresa a la Fórmula 1 décadas después para ayudar al equipo APXGP, en crisis, y termina compitiendo junto al joven talento Joshua Pearce (Damson Idris). La historia mezcla velocidad, rivalidad y redención personal en el mundo extremo de la F1 </p>
+            <p id="modalYearMovie">Year: 2025</p>
+            <p id="modalCategoryMovie">Genero: Ciencia Ficcion</p>
+            <p id="modalRankingMovie">Calificacion: 4</p>
+            <div class="reviewsContainer">
+                <h2>Reseñas de la película</h2>
+                <div class="reviewSubmit">
+                    <input type="text" placeholder="Escribe tu reseña..." class="review-input">
+                    <input type="text" placeholder="Calificacion" class="review-inputCalificacion">
+                    <button type="submit" class="btn-submit">Enviar</button>
+                </div>
+                <p class="review-text">**Laura G.** : La película es increíble. Me mantuvo al borde del asiento todo el tiempo.</p>
+                <p class="review-text">**Carlos P.** : Excelentes actuaciones y la dirección es impecable. ¡La recomiendo!</p>
+
+            </div>
+        </div>
+
+        <div class="rightSide">
+            <div class="containerImageMovie">
+                <img src="https://hips.hearstapps.com/hmg-prod/images/poster-vengadores-endgame-1552567490.jpg" alt="" id="modalURLimage">
+            </div>
+        </div>
     </div>
     
 <script src="../js/principalPage.js"></script>
