@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - KarenFlix</title>
+    <link rel="icon" type="image/png" href="../STORAGE/karenflixLogo.png">
+    <script src="../js/adminGuard.js"></script>
+    <link rel="stylesheet" href="../Style/admin.css">
+</head>
+<body>
+
+    <header class="admin-header">
+        <nav>
+            <ul class="admin-nav">
+                <li><a href="#peliculas-section" class="nav-link active">Películas</a></li>
+                <li><a href="#categorias-section" class="nav-link">Categorías</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="peliculas-section" class="content-section">
+            <h1 class="section-title">Películas</h1>
+            <div id="movies-list" class="list-container">
+                <div id="movie-template" class="list-item" style="display: none;">
+                    <img class="item-poster" src="" alt="Poster">
+                    <h2 class="item-title">Título de la Película</h2>
+                    <div class="item-actions">
+                        <button class="btn btn-update">Actualizar</button>
+                        <button class="btn btn-delete">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="add-button-container">
+                <button class="btn btn-add">Agregar Película</button>
+            </div>
+        </section>
+
+        <section id="categorias-section" class="content-section">
+            <h1 class="section-title">Categorías</h1>
+            <div id="categories-list" class="list-container">
+                <div id="category-template" class="list-item" style="display: none;">
+                    <h2 class="item-title">Nombre de la Categoría</h2>
+                    <div class="item-actions">
+                        <button class="btn btn-update">Actualizar</button>
+                        <button class="btn btn-delete">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="add-button-container">
+                <button class="btn btn-add">Agregar Categoría</button>
+            </div>
+        </section>
+
+        
+    </main>
+
+    <div id="movie-form-modal" class="admin-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-form-title">Agregar Película</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            
+            <form id="movie-form">
+                <input type="hidden" id="movie-id">
+
+                <div class="form-group">
+                    <label for="movie-title">Título</label>
+                    <input type="text" id="movie-title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="movie-description">Descripción</label>
+                    <textarea id="movie-description" rows="4" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="movie-year">Año</label>
+                        <input type="number" id="movie-year" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="movie-imageUrl">URL del Póster</label>
+                        <input type="url" id="movie-imageUrl" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Categorías</label>
+                    <div id="movie-categories-checkboxes" class="checkbox-group">
+                        <p>Cargando categorías...</p>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-add">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="category-form-modal" class="admin-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="category-modal-title">Agregar Categoría</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            
+            <form id="category-form">
+                <input type="hidden" id="category-id">
+
+                <div class="form-group">
+                    <label for="category-name">Nombre de la Categoría</label>
+                    <input type="text" id="category-name" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-add">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="../js/admin.js"></script>
+
+</body>
+</html>

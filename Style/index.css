@@ -1,12 +1,8 @@
-/* --- CSS --- */
-
-/* Estilos generales y fondo de la página */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-image: url('../imagenfondo.jpeg');
 
-    /* 3. Ajustes para que la imagen se vea bien en pantalla completa */
-    background-size: cover;
+        background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -17,7 +13,6 @@ body {
     margin: 0;
 }
 
-/* Contenedor principal del formulario */
 .login-form {
     background-color: #1c1c1c;
     padding: 32px;
@@ -28,7 +23,6 @@ body {
     color: #ffffff;
 }
 
-/* Cabecera con logo y botón de cerrar */
 .form-header {
     display: flex;
     justify-content: space-between;
@@ -39,7 +33,7 @@ body {
 .logo {
     font-size: 28px;
     font-weight: 800;
-    color: #52e03b; /* Verde característico */
+    color: #db0000;     
     letter-spacing: 1px;
 }
 
@@ -57,7 +51,6 @@ body {
     cursor: pointer;
 }
 
-/* Pestañas de Iniciar sesión / Registrarse */
 .tabs {
     display: flex;
     border-bottom: 1px solid #3a3a3a;
@@ -73,15 +66,13 @@ body {
     cursor: pointer;
     position: relative;
     border-bottom: 3px solid transparent;
-    text-decoration: none; /* Quitamos el subrayado de los enlaces */
-}
+    text-decoration: none; }
 
 .tab.active {
     color: #ffffff;
-    border-bottom-color: #52e03b;
+    border-bottom-color: #db0000;
 }
 
-/* Grupo de cada campo (label + input) */
 .form-group {
     margin-bottom: 20px;
 }
@@ -117,7 +108,6 @@ body {
     cursor: pointer;
 }
 
-/* Enlace de 'olvidaste la contraseña' */
 .forgot-password {
     display: block;
     text-align: right;
@@ -132,7 +122,6 @@ body {
     text-decoration: underline;
 }
 
-/* NUEVO: Estilos para el grupo del checkbox */
 .checkbox-group {
     display: flex;
     align-items: center;
@@ -143,22 +132,20 @@ body {
     margin-right: 10px;
     width: 16px;
     height: 16px;
-    accent-color: #52e03b; /* Colorea el check con el verde de la marca */
-}
+    accent-color: #db0000; }
 
 .checkbox-group label {
     font-size: 14px;
     color: #b0b0b0;
 }
 
-/* Botón principal */
 .submit-btn {
     width: 100%;
     padding: 16px;
-    background-color: #52e03b;
+    background-color: #831010;
     border: none;
     border-radius: 6px;
-    color: #121212;
+    color: #ffffff;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
@@ -166,5 +153,5 @@ body {
 }
 
 .submit-btn:hover {
-    background-color: #4ac934;
+    background-color: #db0000;
 }
