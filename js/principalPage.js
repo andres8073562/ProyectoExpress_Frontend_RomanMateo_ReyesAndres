@@ -39,6 +39,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- LÓGICA PARA LA BARRA DE BÚSQUEDA ---
+    const searchInput = document.querySelector('.barra-busqueda input');
+    let debounceTimeout;
+
+    searchInput.addEventListener('input', () => {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => {
+            // Esta función solo se ejecutará 500ms después de que el usuario deje de teclear
+            const searchTerm = searchInput.value.trim();
+            
+            // Llamamos a la función de búsqueda con el término
+            fetchAndDisplayMovies({ search: searchTerm });
+
+        }, 500); // 500 milisegundos de espera
+    });
+
     async function handleReviewSubmit(movieId) {
         // Seleccionamos los inputs dentro del modal
         const reviewCommentInput = modal.querySelector('.review-input');
@@ -233,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Tu función de fetch ahora llama a displayMovies
     async function fetchAndDisplayMovies(options = {}) {
-        const { categoryName, sortBy } = options;
+        const { categoryName, sortBy, search } = options;
         const baseUrl = 'https://karenflix-api.onrender.com/api/v1/movies';
         
         // Construimos la URL con parámetros de forma segura
@@ -244,6 +260,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sortBy) {
             params.append('sortBy', sortBy);
         }
+        if (search) { 
+        params.append('search', search);
+    }
         
         const apiUrl = `${baseUrl}?${params.toString()}`;
         
