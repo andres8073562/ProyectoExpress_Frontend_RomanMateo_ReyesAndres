@@ -39,10 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // 3. Verificamos el rol y redirigimos
             if (payload.role === 'administrador') {
                 alert('¡Bienvenido, Admin Pro hacker!');
-                window.location.href = '../html/admin.html'; // Redirigir al panel de admin
+                window.location.href = './html/admin.html'; // Redirigir al panel de admin
             } else {
                 alert('Inicio de sesión exitoso!');
-                window.location.href = '../html/principalPage.html'; // Redirigir a la página principal
+                window.location.href = './html/principalPage.html'; // Redirigir a la página principal
             }
 
         } catch (error) {
