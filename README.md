@@ -18,22 +18,19 @@ La propuesta de diseño para la mejor experiencia usario aquì:
 
   
 
-| Carpeta/Archivo | Explicación |
 
+
+
+| Carpeta/Archivo                  | Explicación  |
 |------------------------------|--------------|
-
-| [Login.html](/index.html) y [register](/register.html) | Página principal del proyecto. Presenta opciones de ingreso para el administrador o el usuario, cada uno con su respectivo logo. |
-
-| [Pagina Pricipal](/html/principalPage.html) | Contiene los archivos HTML destinados a la interfaz del **usuario**. Incluye el apartado de las peliculas la cual cuenta con filtro y otra pagina que es la de ver el perfil completo de la pelicula donde podermos hacer reseñas sobre la pelicula. |
-
-| [Admin](/html/admin.html) | En este apartado podemos ver el codigo desarrollado de la parte de admin que seria el crud, para eliminar, actualizar y agrgar, tanto para peliculas como para reseñas. |
-
-| [storage](/STORAGE/) | Archivos relacionados con almacenamiento de datos, como las fuentes de letras e imagenes para un funcionamiento básico de la web. |
-
-  
+| [Login.html](./index.html) y [register](./register.html)     | Página principal del proyecto. Presenta opciones de ingreso para el administrador o el usuario, cada uno con su respectivo logo. |
+| [Pagina Pricipal](./html/principalPage.html)      | Contiene los archivos HTML destinados a la interfaz del **usuario**. Incluye el apartado de las peliculas la cual cuenta con filtro y otra pagina que es la de ver el perfil completo de la pelicula donde podermos hacer reseñas sobre la pelicula. |
+| [Admin](./html/admin.html)      | En este apartado podemos ver el codigo desarrollado de la parte de admin que seria el crud, para eliminar, actualizar y agregar, tanto para peliculas como para reseñas. |
+| [script](./js/)              | Código JavaScript, que tiene toda la lógica del proyecto para ambas experiencias, ya sea usuario o administrador. |
+| [style](./Style/)                | Hojas de estilo CSS que definen el aspecto visual del proyecto. Incluye estilos adaptados para distintos componentes. |
+| [storage](./STORAGE/)           |  Archivos relacionados con almacenamiento de datos, como las fuentes de letras e imagenes para un funcionamiento básico de la web. |
 
 ---
-
 ## Explicación del Proyecto
 
   
