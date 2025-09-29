@@ -97,6 +97,9 @@ La aplicación presenta dos tipos de usuarios:
 ![image](/STORAGE/principal.png)
 
 
+![image](/STORAGE/intro.png)
+
+
 
 ![image](/STORAGE/admin.png)
 
