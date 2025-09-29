@@ -12,7 +12,7 @@
         // El payload es la parte del medio del token, y está en formato Base64.
         const payload = JSON.parse(atob(token.split('.')[1]));
         
-        if (payload.role !== 'admin') {
+        if (payload.role !== 'administrador') {
             // Si el rol no es 'admin', pa fuera.
             alert('No tienes permisos para acceder a esta página.');
             window.location.href = 'principalPage.html'; 
