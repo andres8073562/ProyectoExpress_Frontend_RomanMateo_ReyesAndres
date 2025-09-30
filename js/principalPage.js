@@ -15,6 +15,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const rankedLink = document.getElementById('ranked-link');
     const popularLink = document.getElementById('popular-link');
 
+    let allCategories = [];
+    const token = localStorage.getItem('user_token');
+    const apiUrlBase = 'https://karenflix-api.onrender.com/api/v1';
+
+    // --- Obtenemos el ID del usuario logueado ---
+    let currentUserId = null;
+    if (token) {
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            currentUserId = payload.id;
+        } catch (e) {
+            console.error('Token inválido:', e);
+            localStorage.removeItem('user_token'); // Limpiamos el token si es inválido
+        }
+    }
+
+
     // --- LÓGICA EXISTENTE ---
     if(homeLink) {
         homeLink.addEventListener('click', (e) => {
@@ -23,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // NUEVO: Evento para el enlace "Mejor Rankeadas"
+    // Evento para el enlace "Mejor Rankeadas"
     if(rankedLink) {
         rankedLink.addEventListener('click', (e) => {
             e.preventDefault();
@@ -31,13 +48,92 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // NUEVO: Evento para el enlace "Popular"
+    // Evento para el enlace "Popular"
     if(popularLink) {
         popularLink.addEventListener('click', (e) => {
             e.preventDefault();
             fetchAndDisplayMovies({ sortBy: 'popular' }); // Llama a la función con la opción de ordenar
         });
     }
+
+
+    // HEADER PARA QUE APAREZCA O SE ESCONDA SEGUN EL SCROLL
+    const header = document.querySelector('.cabecera');
+    let lastScrollY = window.scrollY; // Guarda la última posición de scroll
+
+    window.addEventListener('scroll', () => {
+        if (lastScrollY < window.scrollY) {
+            // Si la nueva posición es mayor que la anterior, estás bajando
+            header.classList.add('hidden');
+        } else {
+            // Si la nueva posición es menor, estás subiendo
+            header.classList.remove('hidden');
+        }
+        
+        // Actualiza la última posición de scroll
+        lastScrollY = window.scrollY;
+    }); 
+
+
+    // --- FUNCIÓN PARA ELIMINAR UNA RESEÑA PROPIA ---
+    async function deleteReview(reviewId, movieId) {
+        if (!confirm('¿Estás seguro de que quieres eliminar tu reseña?')) return;
+
+        try {
+            const response = await fetch(`${apiUrlBase}/reviews/${reviewId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.msg || 'No se pudo eliminar la reseña.');
+            }
+
+            alert('Reseña eliminada con éxito.');
+            openMovieDetails(movieId); // Recargamos el modal para que desaparezca la reseña
+
+        } catch (error) {
+            console.error('Error al eliminar reseña:', error);
+            alert(`Error: ${error.message}`);
+        }
+    }
+
+
+
+     // --- FUNCIÓN PARA MANEJAR LIKES/DISLIKES ---
+    async function handleInteraction(reviewId, movieId, type) {
+        if (!token) {
+            return alert('Debes iniciar sesión para valorar una reseña.');
+        }
+
+        const url = `${apiUrlBase}/reviews/${reviewId}/${type}`; // El 'type' puede ser 'like' o 'dislike'
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.msg || `No se pudo registrar la acción de '${type}'.`);
+            }
+            
+            // Si la acción fue exitosa, recargamos el modal para ver los contadores actualizados
+            openMovieDetails(movieId);
+
+        } catch (error) {
+            console.error(`Error en la interacción '${type}':`, error);
+            alert(`Error: ${error.message}`);
+        }
+    }
+
+
 
     // --- LÓGICA PARA LA BARRA DE BÚSQUEDA ---
     const searchInput = document.querySelector('.barra-busqueda input');
@@ -170,51 +266,86 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.querySelector('#modalYearMovie').textContent = `Year: ${movie.year}`;
             modal.querySelector('#modalURLimage').src = movie.imageUrl;
             
-            // --- ¡AQUÍ ESTÁ LA LÓGICA PARA LOS GÉNEROS! ---
+            // Lógica para los géneros (sin cambios)
             const categoryNames = movie.categoryIds.map(id => {
-                // Buscamos en nuestro "diccionario" de categorías
                 const category = allCategories.find(cat => cat._id === id);
-                return category ? category.name : 'Desconocido'; // Devolvemos el nombre o un placeholder
+                return category ? category.name : 'Desconocido';
             });
-
             modal.querySelector('#modalCategoryMovie').textContent = `Géneros: ${categoryNames.join(', ')}`;
 
+            // Lógica para la calificación (sin cambios)
             if (movie.averageRating) {
-            // .toFixed(1) es para redondear a un decimal (ej. 4.7)
-            modal.querySelector('#modalRankingMovie').textContent = `Calificación: ${movie.averageRating.toFixed(1)} ⭐`;
-        } else {
-            // Si no hay reseñas, no habrá promedio
-            modal.querySelector('#modalRankingMovie').textContent = 'Calificación: Aún no calificada';
-        }
-        // Lógica para las reseñas
-
-            const reviewsListParent = modal.querySelector('.reviewsContainer');
-        // Limpiamos solo las reseñas (.review-text) para no borrar el <h2> y el <input>
-            reviewsListParent.querySelectorAll('.review-text').forEach(el => el.remove());
+                modal.querySelector('#modalRankingMovie').textContent = `Calificación: ${movie.averageRating.toFixed(1)} ⭐`;
+            } else {
+                modal.querySelector('#modalRankingMovie').textContent = 'Calificación: Aún no calificada';
+            }
+            
+            // 1. Apuntamos al contenedor donde IRÁN las reseñas.
+            const reviewsListContainer = modal.querySelector('#reviews-list');
+            reviewsListContainer.innerHTML = '';
 
             if (movie.reviews && movie.reviews.length > 0) {
                 movie.reviews.forEach(review => {
-                    const reviewElement = document.createElement('p');
-                    reviewElement.className = 'review-text';
-                    reviewElement.innerHTML = `<b>${review.username}:</b> ${review.comment} (${review.rating}⭐)`;
-                    reviewsListParent.appendChild(reviewElement);
-                });
+                    const reviewElement = document.createElement('div');
+                    reviewElement.className = 'review-item';
+                    
+                    const likeIconClass = review.userInteractionType === 'like' ? 'fa-solid' : 'fa-regular';
+                    const dislikeIconClass = review.userInteractionType === 'dislike' ? 'fa-solid' : 'fa-regular';
+
+                    // Empezamos el HTML sin el botón de eliminar
+                    let actionsHTML = `
+                        <button class="btn-like">
+                            <i class="${likeIconClass} fa-thumbs-up"></i> <span>${review.likeCount}</span>
+                        </button>
+                        <button class="btn-dislike">
+                            <i class="${dislikeIconClass} fa-thumbs-down"></i> <span>${review.dislikeCount}</span>
+                        </button>
+                    `;
+
+                    // --- ¡LA CONDICIÓN DE PROPIEDAD! ---
+                    // Si el usuario actual es el dueño de la reseña, añadimos el botón de eliminar.
+                    if (currentUserId && currentUserId === review.userId) {
+                        actionsHTML += `
+                            <button class="btn-delete-review">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        `;
+                    }
+
+                    reviewElement.innerHTML = `
+                        <p class="review-text">
+                            <b>${review.username}:</b> ${review.comment} (${review.rating}⭐)
+                        </p>
+                        <div class="review-actions">${actionsHTML}</div>
+                    `;
+                    
+                    // Añadimos los listeners para like/dislike (sin cambios)
+                    reviewElement.querySelector('.btn-like').addEventListener('click', () => handleInteraction(review._id, movie._id, 'like'));
+                    reviewElement.querySelector('.btn-dislike').addEventListener('click', () => handleInteraction(review._id, movie._id, 'dislike'));
+
+                    // --- AÑADIMOS EL LISTENER PARA EL BOTÓN DE ELIMINAR (SI EXISTE) ---
+                    const deleteBtn = reviewElement.querySelector('.btn-delete-review');
+                    if (deleteBtn) {
+                        deleteBtn.addEventListener('click', () => {
+                            deleteReview(review._id, movie._id);
+                        });
+                    }
+
+                reviewsListContainer.appendChild(reviewElement);
+            });
             } else {
                 const noReviewsElement = document.createElement('p');
                 noReviewsElement.className = 'review-text';
                 noReviewsElement.textContent = 'Aún no hay reseñas. ¡Sé el primero!';
-                reviewsListParent.appendChild(noReviewsElement);
+                reviewsListContainer.appendChild(noReviewsElement);
             }
 
-            // --- NUEVO: Lógica para el botón de enviar reseña ---
+            // ... (Tu lógica para el botón de enviar reseña sigue igual) ...
             const submitBtn = modal.querySelector('.btn-submit');
-            
-            // Clonamos y reemplazamos el botón para limpiar listeners antiguos
             const newSubmitBtn = submitBtn.cloneNode(true);
             submitBtn.parentNode.replaceChild(newSubmitBtn, submitBtn);
-
             newSubmitBtn.addEventListener('click', (e) => {
-                e.preventDefault(); // Previene que el formulario se envíe de forma tradicional
+                e.preventDefault();
                 handleReviewSubmit(movieId);
             });
 

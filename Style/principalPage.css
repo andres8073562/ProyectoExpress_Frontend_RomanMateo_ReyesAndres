@@ -6,11 +6,24 @@ body {
 }
 
 .cabecera {
-    background-color: #060D17;
+    background-color: #060d17bb;
     padding: 1vw 2vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed; /* Lo saca del flujo normal y lo fija en la pantalla */
+    top: 0;          /* Lo pega en la parte superior */
+    left: 0;
+    width: 100%;     /* Asegura que ocupe todo el ancho */
+    z-index: 100;    /* Lo pone por encima del otro contenido */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: top 0.3s ease-in-out; 
+}
+
+.cabecera.hidden {
+    top: -120px; /* Mueve el header completamente fuera de la vista (hacia arriba) */
+    /* Ajusta -100px al alto aproximado de tu header si es más grande */
 }
 
 .navegacion-principal {
@@ -99,13 +112,14 @@ body {
 .menuCategories {
     display: none;
     flex-direction: column;
-    background-color: #292727;
+    background-color: #292727f1;
     align-items: flex-start;
     font-size: 0.9vw;
     min-width: 8vw;
     border-radius: 0.2vw;
     padding: 0.5vw 0;
-
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 
     position: absolute;
 
@@ -501,7 +515,6 @@ body {
 .reviewsContainer {
     margin-top: 2em;
     width: 80%;
-    min-height: 30%;
     padding: 2vw;
     border-radius: 1vw;
     background-color: #1a1a1a;
@@ -547,6 +560,73 @@ body {
     font-weight: 300;
     margin-right: 2%;
 }
+
+/* --- NUEVOS ESTILOS PARA LAS RESEÑAS --- */
+
+/* Contenedor para cada reseña individual */
+.review-item {
+    border-bottom: 1px solid #3a414e; /* Línea separadora */
+    padding: 1vw 0;
+}
+
+.review-item:last-child {
+    border-bottom: none; /* Quita la línea del último elemento */
+}
+
+/* El texto de la reseña no necesita muchos cambios */
+.review-text {
+    font-size: clamp(20px, 1vw, 60px);
+    color: #ccc;
+    margin: 0 0 1vw 0; /* Añade un margen inferior */
+}
+
+/* Contenedor para los botones de like/dislike */
+
+.review-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5vw;
+}
+
+/* Estilo general para los botones */
+.btn-like, .btn-dislike {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Espacio entre el ícono y el número */
+    padding: 0;
+    font-size: 1rem; /* Tamaño para el contador numérico */
+    
+    /* Color por defecto para el ícono y el contador */
+    color: #a0a0a0;
+    transition: color 0.2s ease;
+}
+
+.btn-like:hover, .btn-dislike:hover {
+    color: #ffffff; /* Al pasar el mouse, todo (ícono y texto) se vuelve blanco */
+}
+
+
+/* --- ¡AQUÍ ESTÁ LA PARTE IMPORTANTE! --- */
+
+/* Estilo para los íconos <i> de Font Awesome */
+.review-actions i {
+    font-size: 1.5rem; /* Ajusta el tamaño del ícono como prefieras */
+}
+
+/* Estilo específico para cuando un ícono de LIKE está activo (sólido) */
+.fa-solid.fa-thumbs-up {
+    color: #3b82f6; /* Un color azul para indicar que está "likeado" */
+}
+
+/* Estilo específico para cuando un ícono de DISLIKE está activo (sólido) */
+.fa-solid.fa-thumbs-down {
+    color: #ef4444; /* Un color rojo para indicar que está "dislikeado" */
+}
+
+
 
 .btn-submit {
     width: 15%;

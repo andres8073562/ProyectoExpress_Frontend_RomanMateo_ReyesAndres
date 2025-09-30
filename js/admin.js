@@ -1,5 +1,3 @@
-// js/admin.js
-
 document.addEventListener('DOMContentLoaded', () => {
     // --- Autenticación y Variables Globales ---
     const token = localStorage.getItem('user_token');
@@ -29,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoryIdInput = document.getElementById('category-id');
     const categoryModalTitle = document.getElementById('category-modal-title');
     const addCategoryBtn = document.querySelector('#categorias-section .btn-add');
+
+
 
 
 

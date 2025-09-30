@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         } catch (error) {
-            // Manejamos errores de red
             console.error('Error de red:', error);
             alert('No se pudo conectar con el servidor. Inténtalo más tarde.');
         }

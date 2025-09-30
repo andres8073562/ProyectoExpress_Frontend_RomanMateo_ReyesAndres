@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
             const data = await response.json();
-            const token = data.token;
+            const token = data.token;   
 
             // 1. Guardamos el token en localStorage
             localStorage.setItem('user_token', token);
